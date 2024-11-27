@@ -1,0 +1,544 @@
+Index: locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/mappers/AluguelMapper.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/mappers/AluguelMapper.java b/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/mappers/AluguelMapper.java
+new file mode 100644
+--- /dev/null	(date 1731275314085)
++++ b/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/mappers/AluguelMapper.java	(date 1731275314085)
+@@ -0,0 +1,14 @@
++package com.locadoraveiculo.locadoraveiculosapp.mappers;
++
++import com.locadoraveiculo.locadoraveiculosapp.model.Aluguel;
++import org.mapstruct.BeanMapping;
++import org.mapstruct.Mapper;
++import org.mapstruct.MappingTarget;
++import org.mapstruct.NullValuePropertyMappingStrategy;
++
++@Mapper(componentModel = "spring")
++public interface AluguelMapper {
++
++    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
++    void atualizarAluguel(Aluguel aluguelAtualizado, @MappingTarget Aluguel aluguelExistente);
++}
+\ No newline at end of file
+Index: locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/service/AgenciaService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.locadoraveiculo.locadoraveiculosapp.service;\r\n\r\n\r\nimport com.locadoraveiculo.locadoraveiculosapp.model.Agencia;\r\nimport com.locadoraveiculo.locadoraveiculosapp.repository.AgenciaRepository;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.stereotype.Service;\r\n\r\nimport java.util.List;\r\nimport java.util.Optional;\r\n\r\n@Service\r\npublic class AgenciaService {\r\n\r\n    private AgenciaRepository agenciaRepository;\r\n\r\n    @Autowired\r\n    public AgenciaService(AgenciaRepository agenciaRepository) {\r\n        this.agenciaRepository = agenciaRepository;\r\n    }\r\n\r\n    public Agencia criarAgencia(Agencia agencia) {\r\n        return agenciaRepository.save(agencia);\r\n    }\r\n\r\n    public List<Agencia> listarAgencias() {\r\n        return agenciaRepository.findAll();\r\n    }\r\n\r\n    public Optional<Agencia> buscarAgenciaPorCodigo(Long numeroAgencia) {\r\n        return agenciaRepository.findById(numeroAgencia);\r\n    }\r\n\r\n    public Agencia atualizarAgencia(Long numeroAgencia, Agencia agenciaAtualizada) {\r\n        return agenciaRepository.findById(numeroAgencia)\r\n                .map(agenciaExistente -> {\r\n                    agenciaExistente.setNomeAgencia(agenciaAtualizada.getNomeAgencia());\r\n                    agenciaExistente.setEnderecoAgencia(agenciaAtualizada.getEnderecoAgencia());\r\n\r\n                    return agenciaRepository.save(agenciaExistente);\r\n                })\r\n                .orElseThrow(() -> new RuntimeException(\"Agência não encontrada com o número: \" + numeroAgencia));\r\n    }\r\n\r\n    public void removerAgencia(Long numeroAgencia) {\r\n        agenciaRepository.deleteById(numeroAgencia);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/service/AgenciaService.java b/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/service/AgenciaService.java
+--- a/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/service/AgenciaService.java	(revision 913ca88a496603ccce97a9baa1b1db7d8a3d38a8)
++++ b/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/service/AgenciaService.java	(date 1731275314087)
+@@ -1,48 +1,54 @@
+ package com.locadoraveiculo.locadoraveiculosapp.service;
+ 
+ 
++import com.locadoraveiculo.locadoraveiculosapp.mappers.AgenciaMapper;
+ import com.locadoraveiculo.locadoraveiculosapp.model.Agencia;
+ import com.locadoraveiculo.locadoraveiculosapp.repository.AgenciaRepository;
+ import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.data.domain.Page;
++import org.springframework.data.domain.PageRequest;
++import org.springframework.data.domain.Pageable;
++import org.springframework.data.domain.Sort;
++import org.springframework.http.HttpStatus;
+ import org.springframework.stereotype.Service;
+-
+-import java.util.List;
+-import java.util.Optional;
++import org.springframework.web.server.ResponseStatusException;
+ 
+ @Service
+ public class AgenciaService {
+ 
++    @Autowired
+     private AgenciaRepository agenciaRepository;
+ 
+     @Autowired
+-    public AgenciaService(AgenciaRepository agenciaRepository) {
+-        this.agenciaRepository = agenciaRepository;
+-    }
++    private AgenciaMapper agenciaMapper;
+ 
+     public Agencia criarAgencia(Agencia agencia) {
+-        return agenciaRepository.save(agencia);
++        agenciaRepository.save(agencia);
++        return agencia;
++    }
++
++    public Page<Agencia> listarAgencias(int pagina, int tamanho){
++        Pageable pageable = PageRequest.of(pagina, tamanho, Sort.by("numeroAgencia").ascending());
++        return agenciaRepository.findAll(pageable);
+     }
+ 
+-    public List<Agencia> listarAgencias() {
+-        return agenciaRepository.findAll();
++    public Agencia buscarAgenciaPorId(Long numeroAgencia) {
++        return agenciaRepository.findById(numeroAgencia)
++                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Agência com número " + numeroAgencia + " não foi encontrado"));
+     }
+ 
+-    public Optional<Agencia> buscarAgenciaPorCodigo(Long numeroAgencia) {
+-        return agenciaRepository.findById(numeroAgencia);
++    public Agencia buscarAgenciaPorCodigo(Long numeroAgencia) {
++        return buscarAgenciaPorId(numeroAgencia);
+     }
+ 
+     public Agencia atualizarAgencia(Long numeroAgencia, Agencia agenciaAtualizada) {
+-        return agenciaRepository.findById(numeroAgencia)
+-                .map(agenciaExistente -> {
+-                    agenciaExistente.setNomeAgencia(agenciaAtualizada.getNomeAgencia());
+-                    agenciaExistente.setEnderecoAgencia(agenciaAtualizada.getEnderecoAgencia());
+-
+-                    return agenciaRepository.save(agenciaExistente);
+-                })
+-                .orElseThrow(() -> new RuntimeException("Agência não encontrada com o número: " + numeroAgencia));
++        Agencia agenciaExistente = buscarAgenciaPorId(numeroAgencia);
++        agenciaMapper.atualizarAgencia(agenciaAtualizada, agenciaExistente);
++        return agenciaRepository.save(agenciaExistente);
+     }
+ 
+     public void removerAgencia(Long numeroAgencia) {
+-        agenciaRepository.deleteById(numeroAgencia);
++        Agencia produtoExistente = buscarAgenciaPorId(numeroAgencia);
++        agenciaRepository.delete(produtoExistente);
+     }
+ }
+Index: locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/mappers/AgenciaMapper.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/mappers/AgenciaMapper.java b/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/mappers/AgenciaMapper.java
+new file mode 100644
+--- /dev/null	(date 1731275314085)
++++ b/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/mappers/AgenciaMapper.java	(date 1731275314085)
+@@ -0,0 +1,14 @@
++package com.locadoraveiculo.locadoraveiculosapp.mappers;
++
++import com.locadoraveiculo.locadoraveiculosapp.model.Agencia;
++import org.mapstruct.BeanMapping;
++import org.mapstruct.Mapper;
++import org.mapstruct.MappingTarget;
++import org.mapstruct.NullValuePropertyMappingStrategy;
++
++@Mapper(componentModel = "spring")
++public interface AgenciaMapper {
++
++    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
++    void atualizarAgencia(Agencia agenciaAtualizada, @MappingTarget Agencia agenciaExistente);
++}
+Index: locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/model/Agencia.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.locadoraveiculo.locadoraveiculosapp.model;\r\n\r\n\r\nimport jakarta.persistence.*;\r\nimport lombok.AllArgsConstructor;\r\nimport lombok.Data;\r\nimport lombok.NoArgsConstructor;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\n\r\n@AllArgsConstructor\r\n@NoArgsConstructor\r\n@Data\r\n@Entity\r\n@Table(name = \"agencias\")\r\npublic class Agencia {\r\n\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private Long numeroAgencia;\r\n\r\n    private String nomeAgencia;\r\n\r\n    private String enderecoAgencia;\r\n\r\n    @OneToMany(mappedBy = \"agencia\", cascade = CascadeType.ALL, orphanRemoval = true)\r\n    private List<Aluguel> alugueis = new ArrayList<>();\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/model/Agencia.java b/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/model/Agencia.java
+--- a/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/model/Agencia.java	(revision 913ca88a496603ccce97a9baa1b1db7d8a3d38a8)
++++ b/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/model/Agencia.java	(date 1731275314086)
+@@ -14,15 +14,17 @@
+ @NoArgsConstructor
+ @Data
+ @Entity
+-@Table(name = "agencias")
++@Table(name = "AGENCIAS")
+ public class Agencia {
+ 
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+     private Long numeroAgencia;
+ 
++    @Column(name = "NOME_AGENCIA")
+     private String nomeAgencia;
+ 
++    @Column(name = "ENDERECO_AGENCIA")
+     private String enderecoAgencia;
+ 
+     @OneToMany(mappedBy = "agencia", cascade = CascadeType.ALL, orphanRemoval = true)
+Index: locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/model/Aluguel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.locadoraveiculo.locadoraveiculosapp.model;\r\n\r\n\r\nimport jakarta.persistence.*;\r\nimport lombok.AllArgsConstructor;\r\nimport lombok.Data;\r\nimport lombok.NoArgsConstructor;\r\n\r\nimport java.math.BigDecimal;\r\nimport java.util.Date;\r\n\r\n\r\n@AllArgsConstructor\r\n@NoArgsConstructor\r\n@Data\r\n@Entity\r\n@Table(name = \"alugueis\")\r\npublic class Aluguel {\r\n\r\n\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private Long aluguel_id;\r\n\r\n    @ManyToOne(fetch = FetchType.LAZY)\r\n    @JoinColumn(name = \"numeroAgencia\")\r\n    private Agencia agencia;\r\n\r\n    @ManyToOne(fetch = FetchType.LAZY)\r\n    @JoinColumn(name = \"veiculo_id\")\r\n    private Veiculo veiculo;\r\n\r\n    private BigDecimal valorCobrado;\r\n\r\n    @Temporal(TemporalType.TIMESTAMP)\r\n    private Date dataInicio;\r\n\r\n    @Temporal(TemporalType.TIMESTAMP)\r\n    private Date dataFim;\r\n\r\n    @Enumerated(EnumType.STRING)\r\n    private TipoPagamento tipoPagamento;\r\n\r\n    public enum TipoPagamento{\r\n        AVISTA,\r\n        CREDITO,\r\n        DEBITO\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/model/Aluguel.java b/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/model/Aluguel.java
+--- a/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/model/Aluguel.java	(revision 913ca88a496603ccce97a9baa1b1db7d8a3d38a8)
++++ b/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/model/Aluguel.java	(date 1731275314086)
+@@ -30,15 +30,19 @@
+     @JoinColumn(name = "veiculo_id")
+     private Veiculo veiculo;
+ 
++    @Column(name = "VALOR_COBRADO")
+     private BigDecimal valorCobrado;
+ 
+     @Temporal(TemporalType.TIMESTAMP)
++    @Column(name = "DATA_INICIO")
+     private Date dataInicio;
+ 
+     @Temporal(TemporalType.TIMESTAMP)
++    @Column(name = "DATA_FIM")
+     private Date dataFim;
+ 
+     @Enumerated(EnumType.STRING)
++    @Column(name = "TIPO_PAGAMENTO")
+     private TipoPagamento tipoPagamento;
+ 
+     public enum TipoPagamento{
+Index: .idea/jarRepositories.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/jarRepositories.xml b/.idea/jarRepositories.xml
+new file mode 100644
+--- /dev/null	(date 1731275314083)
++++ b/.idea/jarRepositories.xml	(date 1731275314083)
+@@ -0,0 +1,20 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="RemoteRepositoriesConfiguration">
++    <remote-repository>
++      <option name="id" value="central" />
++      <option name="name" value="Central Repository" />
++      <option name="url" value="https://repo.maven.apache.org/maven2" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="central" />
++      <option name="name" value="Maven Central repository" />
++      <option name="url" value="https://repo1.maven.org/maven2" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="jboss.community" />
++      <option name="name" value="JBoss Community repository" />
++      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
++    </remote-repository>
++  </component>
++</project>
+\ No newline at end of file
+Index: locadora-veiculos-app/pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\r\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n    <modelVersion>4.0.0</modelVersion>\r\n    <parent>\r\n        <groupId>org.springframework.boot</groupId>\r\n        <artifactId>spring-boot-starter-parent</artifactId>\r\n        <version>3.3.5</version>\r\n        <relativePath/>\r\n    </parent>\r\n    <groupId>com.locadoraVeiculo</groupId>\r\n    <artifactId>locadora-veiculos-app</artifactId>\r\n    <version>0.0.1-SNAPSHOT</version>\r\n    <name>locadora-veiculos-app</name>\r\n    <description>locadora-veiculos-app</description>\r\n\r\n    <properties>\r\n        <java.version>17</java.version>\r\n    </properties>\r\n\r\n    <dependencies>\r\n        <!-- Spring Boot Web Starter -->\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-web</artifactId>\r\n        </dependency>\r\n\r\n        <!-- Spring Boot Data JPA Starter -->\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-data-jpa</artifactId>\r\n        </dependency>\r\n\r\n        <!-- Spring Boot DevTools -->\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-devtools</artifactId>\r\n            <scope>runtime</scope>\r\n            <optional>true</optional>\r\n        </dependency>\r\n\r\n        <!-- H2 Database for testing and development -->\r\n        <dependency>\r\n            <groupId>com.h2database</groupId>\r\n            <artifactId>h2</artifactId>\r\n            <scope>runtime</scope>\r\n        </dependency>\r\n\r\n        <!-- Lombok for reducing boilerplate code -->\r\n        <dependency>\r\n            <groupId>org.projectlombok</groupId>\r\n            <artifactId>lombok</artifactId>\r\n            <optional>true</optional>\r\n        </dependency>\r\n\r\n        <!-- Spring Boot Starter Test -->\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-test</artifactId>\r\n            <scope>test</scope>\r\n        </dependency>\r\n\r\n        <!-- JSTL Support for JSP -->\r\n        <dependency>\r\n            <groupId>jakarta.servlet.jsp.jstl</groupId>\r\n            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>\r\n            <version>3.0.0</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.glassfish.web</groupId>\r\n            <artifactId>jakarta.servlet.jsp.jstl</artifactId>\r\n            <version>3.0.0</version>\r\n        </dependency>\r\n\r\n        <!-- Tomcat Embed Jasper for JSP support -->\r\n        <dependency>\r\n            <groupId>org.apache.tomcat.embed</groupId>\r\n            <artifactId>tomcat-embed-jasper</artifactId>\r\n        </dependency>\r\n\r\n        <!-- Jakarta Servlet API -->\r\n        <dependency>\r\n            <groupId>jakarta.servlet</groupId>\r\n            <artifactId>jakarta.servlet-api</artifactId>\r\n            <scope>provided</scope>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>org.springdoc</groupId>\r\n            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>\r\n            <version>2.1.0</version>\r\n        </dependency>\r\n\r\n    </dependencies>\r\n\r\n    <build>\r\n        <plugins>\r\n            <plugin>\r\n                <groupId>org.springframework.boot</groupId>\r\n                <artifactId>spring-boot-maven-plugin</artifactId>\r\n                <configuration>\r\n                    <excludes>\r\n                        <exclude>\r\n                            <groupId>org.projectlombok</groupId>\r\n                            <artifactId>lombok</artifactId>\r\n                        </exclude>\r\n                    </excludes>\r\n                </configuration>\r\n            </plugin>\r\n        </plugins>\r\n    </build>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/locadora-veiculos-app/pom.xml b/locadora-veiculos-app/pom.xml
+--- a/locadora-veiculos-app/pom.xml	(revision 913ca88a496603ccce97a9baa1b1db7d8a3d38a8)
++++ b/locadora-veiculos-app/pom.xml	(date 1731275314084)
+@@ -53,6 +53,16 @@
+             <artifactId>lombok</artifactId>
+             <optional>true</optional>
+         </dependency>
++        <dependency>
++            <groupId>org.mapstruct</groupId>
++            <artifactId>mapstruct</artifactId>
++            <version>1.6.2</version>
++        </dependency>
++        <dependency>
++            <groupId>org.mapstruct</groupId>
++            <artifactId>mapstruct-processor</artifactId>
++            <version>1.6.2</version>
++        </dependency>
+ 
+         <!-- Spring Boot Starter Test -->
+         <dependency>
+Index: locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/repository/AluguelRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.locadoraveiculo.locadoraveiculosapp.repository;\r\n\r\nimport com.locadoraveiculo.locadoraveiculosapp.model.Aluguel;\r\nimport org.springframework.data.jpa.repository.JpaRepository;\r\nimport org.springframework.stereotype.Repository;\r\n\r\n\r\n@Repository\r\npublic interface AluguelRepository extends JpaRepository<Aluguel, Long> {\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/repository/AluguelRepository.java b/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/repository/AluguelRepository.java
+--- a/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/repository/AluguelRepository.java	(revision 913ca88a496603ccce97a9baa1b1db7d8a3d38a8)
++++ b/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/repository/AluguelRepository.java	(date 1731275314087)
+@@ -1,11 +1,14 @@
+ package com.locadoraveiculo.locadoraveiculosapp.repository;
+ 
+ import com.locadoraveiculo.locadoraveiculosapp.model.Aluguel;
++import org.springframework.data.domain.Page;
++import org.springframework.data.domain.Pageable;
+ import org.springframework.data.jpa.repository.JpaRepository;
+ import org.springframework.stereotype.Repository;
+ 
+ 
+ @Repository
+ public interface AluguelRepository extends JpaRepository<Aluguel, Long> {
++    Page<Aluguel> findAll(Pageable pageable);
+ 
+ }
+Index: locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/service/AluguelService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.locadoraveiculo.locadoraveiculosapp.service;\r\n\r\nimport com.locadoraveiculo.locadoraveiculosapp.model.Aluguel;\r\nimport com.locadoraveiculo.locadoraveiculosapp.model.Veiculo;\r\nimport com.locadoraveiculo.locadoraveiculosapp.repository.AluguelRepository;\r\nimport com.locadoraveiculo.locadoraveiculosapp.repository.VeiculoRepository;\r\nimport jakarta.persistence.EntityNotFoundException;\r\nimport jakarta.transaction.Transactional;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.stereotype.Service;\r\n\r\nimport java.util.Date;\r\nimport java.util.List;\r\nimport java.util.Optional;\r\n\r\n@Service\r\npublic class AluguelService {\r\n\r\n    private final AluguelRepository aluguelRepository;\r\n    private final VeiculoRepository veiculoRepository;\r\n\r\n\r\n    @Autowired\r\n    public AluguelService(AluguelRepository aluguelRepository, VeiculoRepository veiculoRepository) {\r\n        this.aluguelRepository = aluguelRepository;\r\n        this.veiculoRepository = veiculoRepository;\r\n    }\r\n\r\n\r\n    @Transactional\r\n    public Aluguel CriarAluguel(Aluguel aluguel) {\r\n        Veiculo veiculo = aluguel.getVeiculo();\r\n        if (veiculo != null && veiculo.getStatusAluguel() == Veiculo.StatusAluguel.DISPONIVEL) {\r\n            veiculo.setStatusAluguel(Veiculo.StatusAluguel.ALUGADO);\r\n            veiculoRepository.save(veiculo);\r\n            return aluguelRepository.save(aluguel);\r\n        } else {\r\n            throw new IllegalStateException(\"Veiculo nao está disponivel para alugar\");\r\n        }\r\n    }\r\n\r\n    public List<Aluguel> listarAluguels() {\r\n        return aluguelRepository.findAll();\r\n    }\r\n\r\n    public Optional<Aluguel> buscarAluguelPorcodigo(Long aluguel_id) {\r\n        return aluguelRepository.findById(aluguel_id);\r\n    }\r\n\r\n    public Aluguel atualizarAluguel(Long aluguel_id, Aluguel aluguelAtualizado) {\r\n        return aluguelRepository.findById(aluguel_id)\r\n                .map(aluguelExistente -> {\r\n                    aluguelExistente.setValorCobrado(aluguelAtualizado.getValorCobrado());\r\n                    aluguelExistente.setDataInicio(aluguelAtualizado.getDataInicio());\r\n                    aluguelExistente.setDataFim(aluguelAtualizado.getDataFim());\r\n                    aluguelExistente.setTipoPagamento(aluguelAtualizado.getTipoPagamento());\r\n\r\n                    // Verifica se o veículo foi alterado\r\n                    if (!aluguelExistente.getVeiculo().equals(aluguelAtualizado.getVeiculo())) {\r\n                        Veiculo veiculoAntigo = aluguelExistente.getVeiculo();\r\n                        Veiculo veiculoNovo = aluguelAtualizado.getVeiculo();\r\n\r\n                        // Libera o veículo antigo\r\n                        if (veiculoAntigo != null) {\r\n                            veiculoAntigo.setStatusAluguel(Veiculo.StatusAluguel.DISPONIVEL);\r\n                            veiculoRepository.save(veiculoAntigo);\r\n                        }\r\n\r\n                        // Verifica e atualiza o novo veículo\r\n                        if (veiculoNovo != null) {\r\n                            if (veiculoNovo.getStatusAluguel() == Veiculo.StatusAluguel.DISPONIVEL) {\r\n                                veiculoNovo.setStatusAluguel(Veiculo.StatusAluguel.ALUGADO);\r\n                                veiculoRepository.save(veiculoNovo);\r\n                                aluguelExistente.setVeiculo(veiculoNovo);\r\n                            } else {\r\n                                throw new IllegalStateException(\"Novo veículo não está disponível para aluguel.\");\r\n                            }\r\n                        } else {\r\n                            throw new IllegalArgumentException(\"Veículo não pode ser nulo.\");\r\n                        }\r\n                    }\r\n\r\n                    return aluguelRepository.save(aluguelExistente);\r\n                })\r\n                .orElseThrow(() -> new EntityNotFoundException(\"Aluguel não encontrado com veiculo_id: \" + aluguel_id));\r\n    }\r\n\r\n    @Transactional\r\n    public void deletarAluguel(Long aluguel_id) {\r\n        Aluguel aluguel = aluguelRepository.findById(aluguel_id)\r\n                .orElseThrow(() -> new EntityNotFoundException(\"Aluguel nao encontrado\" + aluguel_id));\r\n\r\n        Veiculo veiculo = aluguel.getVeiculo();\r\n        if (veiculo != null) {\r\n            veiculo.setStatusAluguel(Veiculo.StatusAluguel.DISPONIVEL);\r\n            veiculoRepository.save(veiculo);\r\n        }\r\n        aluguelRepository.deleteById(aluguel_id);\r\n    }\r\n\r\n\r\n    @Transactional\r\n    public Aluguel finalizarAluguel(Long aluguel_id) {\r\n        return aluguelRepository.findById(aluguel_id)\r\n                .map(aluguel -> {\r\n                    aluguel.setDataFim(new Date());\r\n                    Veiculo veiculo = aluguel.getVeiculo();\r\n                    if (veiculo != null) {\r\n                        veiculo.setStatusAluguel(Veiculo.StatusAluguel.DISPONIVEL);\r\n                        veiculoRepository.save(veiculo);\r\n                    }\r\n                    return aluguelRepository.save(aluguel);\r\n                })\r\n                .orElseThrow(() -> new EntityNotFoundException(\"Aluguel nao encontrado com veiculo_id\" + aluguel_id));\r\n    }\r\n\r\n\r\n    public List<Aluguel> buscarAlugueisAtivos() {\r\n        return aluguelRepository.findAll().stream()\r\n                .filter(aluguel -> aluguel.getDataInicio() == null)\r\n                .toList();\r\n    }\r\n\r\n    public List<Aluguel> buscarAlugueisFinalizados() {\r\n        return aluguelRepository.findAll().stream()\r\n                .filter(aluguel -> aluguel.getDataFim() != null)\r\n                .toList();\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/service/AluguelService.java b/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/service/AluguelService.java
+--- a/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/service/AluguelService.java	(revision 913ca88a496603ccce97a9baa1b1db7d8a3d38a8)
++++ b/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/service/AluguelService.java	(date 1731275314087)
+@@ -1,5 +1,6 @@
+ package com.locadoraveiculo.locadoraveiculosapp.service;
+ 
++import com.locadoraveiculo.locadoraveiculosapp.mappers.AluguelMapper;
+ import com.locadoraveiculo.locadoraveiculosapp.model.Aluguel;
+ import com.locadoraveiculo.locadoraveiculosapp.model.Veiculo;
+ import com.locadoraveiculo.locadoraveiculosapp.repository.AluguelRepository;
+@@ -7,24 +8,25 @@
+ import jakarta.persistence.EntityNotFoundException;
+ import jakarta.transaction.Transactional;
+ import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.data.domain.Page;
++import org.springframework.data.domain.PageRequest;
++import org.springframework.data.domain.Pageable;
++import org.springframework.data.domain.Sort;
++import org.springframework.http.HttpStatus;
+ import org.springframework.stereotype.Service;
++import org.springframework.web.server.ResponseStatusException;
+ 
+ import java.util.Date;
+-import java.util.List;
+-import java.util.Optional;
+ 
+ @Service
+ public class AluguelService {
+ 
+-    private final AluguelRepository aluguelRepository;
+-    private final VeiculoRepository veiculoRepository;
+-
+-
++    @Autowired
++    private AluguelRepository aluguelRepository;
++    @Autowired
++    private VeiculoRepository veiculoRepository;
+     @Autowired
+-    public AluguelService(AluguelRepository aluguelRepository, VeiculoRepository veiculoRepository) {
+-        this.aluguelRepository = aluguelRepository;
+-        this.veiculoRepository = veiculoRepository;
+-    }
++    private AluguelMapper aluguelMapper;
+ 
+ 
+     @Transactional
+@@ -39,12 +41,14 @@
+         }
+     }
+ 
+-    public List<Aluguel> listarAluguels() {
+-        return aluguelRepository.findAll();
++    public Page<Aluguel> listarAluguels(int pagina, int tamanho){
++        Pageable pageable = PageRequest.of(pagina, tamanho, Sort.by("aluguel_id").ascending());
++        return aluguelRepository.findAll(pageable);
+     }
+ 
+-    public Optional<Aluguel> buscarAluguelPorcodigo(Long aluguel_id) {
+-        return aluguelRepository.findById(aluguel_id);
++    public Aluguel buscarAluguelPorcodigo(Long aluguel_id) {
++        return aluguelRepository.findById(aluguel_id)
++                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Aluguel com id " + aluguel_id + " não foi encontrado"));
+     }
+ 
+     public Aluguel atualizarAluguel(Long aluguel_id, Aluguel aluguelAtualizado) {
+@@ -87,15 +91,8 @@
+ 
+     @Transactional
+     public void deletarAluguel(Long aluguel_id) {
+-        Aluguel aluguel = aluguelRepository.findById(aluguel_id)
+-                .orElseThrow(() -> new EntityNotFoundException("Aluguel nao encontrado" + aluguel_id));
+-
+-        Veiculo veiculo = aluguel.getVeiculo();
+-        if (veiculo != null) {
+-            veiculo.setStatusAluguel(Veiculo.StatusAluguel.DISPONIVEL);
+-            veiculoRepository.save(veiculo);
+-        }
+-        aluguelRepository.deleteById(aluguel_id);
++        Aluguel aluguelExistente = buscarAluguelPorcodigo(aluguel_id);
++        aluguelRepository.delete(aluguelExistente);
+     }
+ 
+ 
+@@ -115,16 +112,14 @@
+     }
+ 
+ 
+-    public List<Aluguel> buscarAlugueisAtivos() {
+-        return aluguelRepository.findAll().stream()
+-                .filter(aluguel -> aluguel.getDataInicio() == null)
+-                .toList();
++    public Page<Aluguel> buscarAlugueisAtivos(int pagina, int tamanho){
++        Pageable pageable = PageRequest.of(pagina, tamanho, Sort.by("aluguel_id").ascending());
++        return aluguelRepository.findAll(pageable);
+     }
+ 
+-    public List<Aluguel> buscarAlugueisFinalizados() {
+-        return aluguelRepository.findAll().stream()
+-                .filter(aluguel -> aluguel.getDataFim() != null)
+-                .toList();
++    public Page<Aluguel> buscarAlugueisFinalizados(int pagina, int tamanho){
++        Pageable pageable = PageRequest.of(pagina, tamanho, Sort.by("aluguel_id").ascending());
++        return aluguelRepository.findAll(pageable);
+     }
+ 
+ }
+Index: locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/repository/AgenciaRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.locadoraveiculo.locadoraveiculosapp.repository;\r\n\r\nimport com.locadoraveiculo.locadoraveiculosapp.model.Agencia;\r\nimport org.springframework.data.jpa.repository.JpaRepository;\r\nimport org.springframework.stereotype.Repository;\r\n\r\n@Repository\r\npublic interface AgenciaRepository extends JpaRepository<Agencia, Long> {\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/repository/AgenciaRepository.java b/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/repository/AgenciaRepository.java
+--- a/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/repository/AgenciaRepository.java	(revision 913ca88a496603ccce97a9baa1b1db7d8a3d38a8)
++++ b/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/repository/AgenciaRepository.java	(date 1731275314086)
+@@ -1,10 +1,14 @@
+ package com.locadoraveiculo.locadoraveiculosapp.repository;
+ 
+ import com.locadoraveiculo.locadoraveiculosapp.model.Agencia;
++import org.springframework.data.domain.Page;
++import org.springframework.data.domain.Pageable;
+ import org.springframework.data.jpa.repository.JpaRepository;
+ import org.springframework.stereotype.Repository;
+ 
+ @Repository
+ public interface AgenciaRepository extends JpaRepository<Agencia, Long> {
+ 
+-}
++    Page<Agencia> findAll(Pageable pageable);
++
++}
+\ No newline at end of file
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1731275314083)
++++ b/.idea/vcs.xml	(date 1731275314083)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1731275314083)
++++ b/.idea/misc.xml	(date 1731275314083)
+@@ -0,0 +1,14 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="MavenProjectsManager">
++    <option name="originalFiles">
++      <list>
++        <option value="$PROJECT_DIR$/locadora-veiculos-app/pom.xml" />
++      </list>
++    </option>
++  </component>
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_23" default="true" project-jdk-name="openjdk-23" project-jdk-type="JavaSDK">
++    <output url="file://$PROJECT_DIR$/out" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/Projeto-Spring-LocadoraVeiculos.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/Projeto-Spring-LocadoraVeiculos.iml b/.idea/Projeto-Spring-LocadoraVeiculos.iml
+new file mode 100644
+--- /dev/null	(date 1731275314082)
++++ b/.idea/Projeto-Spring-LocadoraVeiculos.iml	(date 1731275314082)
+@@ -0,0 +1,9 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="JAVA_MODULE" version="4">
++  <component name="NewModuleRootManager" inherit-compiler-output="true">
++    <exclude-output />
++    <content url="file://$MODULE_DIR$" />
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+new file mode 100644
+--- /dev/null	(date 1731275427908)
++++ b/.idea/modules.xml	(date 1731275427908)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/Projeto-Spring-LocadoraVeiculos.iml" filepath="$PROJECT_DIR$/.idea/Projeto-Spring-LocadoraVeiculos.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+new file mode 100644
+--- /dev/null	(date 1731275314082)
++++ b/.idea/compiler.xml	(date 1731275314082)
+@@ -0,0 +1,19 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CompilerConfiguration">
++    <annotationProcessing>
++      <profile default="true" name="Default" enabled="true" />
++      <profile name="Maven default annotation processors profile" enabled="true">
++        <sourceOutputDir name="target/generated-sources/annotations" />
++        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
++        <outputRelativeToContentRoot value="true" />
++        <module name="locadora-veiculos-app" />
++      </profile>
++    </annotationProcessing>
++  </component>
++  <component name="JavacSettings">
++    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
++      <module name="locadora-veiculos-app" options="-parameters" />
++    </option>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/encodings.xml b/.idea/encodings.xml
+new file mode 100644
+--- /dev/null	(date 1731275314082)
++++ b/.idea/encodings.xml	(date 1731275314082)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Encoding">
++    <file url="file://$PROJECT_DIR$/locadora-veiculos-app/src/main/java" charset="UTF-8" />
++  </component>
++</project>
+\ No newline at end of file

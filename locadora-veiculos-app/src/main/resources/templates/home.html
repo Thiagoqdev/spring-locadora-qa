@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoRent - Locadora de Veículos Premium</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.1/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/webjars/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Roboto', sans-serif;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+            url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+        .feature-icon {
+            font-size: 2rem;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">AutoRent</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Veículos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Ofertas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contato</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-4 mb-4">Alugue o Carro dos Seus Sonhos</h1>
+        <p class="lead mb-5">Experimente o luxo e conforto com nossa frota premium de veículos.</p>
+        <a href="#reserva" class="btn btn-primary btn-lg">Faça sua Reserva</a>
+    </div>
+</section>
+
+<div class="container my-5">
+    <div class="row">
+        <!-- Reservation Form -->
+        <div class="col-lg-8">
+            <div class="card" id="reserva">
+                <div class="card-header text-center py-3">
+                    <h3 class="mb-0">Faça sua Reserva de Veículo</h3>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/reserva}" method="post">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="pickupAgency" class="form-label">Agência de Retirada</label>
+                                <select class="form-select" id="pickupAgency" name="agencia" required>
+                                    <option value="">Selecione...</option>
+                                    <option th:each="agencia : ${agencias}"
+                                            th:value="${agencia.numeroAgencia}"
+                                            th:text="${agencia.nomeAgencia}">Agência</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="vehicleType" class="form-label">Tipo de Veículo</label>
+                                <select class="form-select" id="vehicleType" name="tipoVeiculo" required>
+                                    <option value="">Selecione...</option>
+                                    <option th:each="tipo : ${tiposVeiculos}"
+                                            th:value="${tipo}"
+                                            th:text="${tipo}">Tipo de Veículo</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="pickupDate" class="form-label">Data de Retirada</label>
+                                <input type="date" class="form-control" id="pickupDate" name="dataInicio" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="returnDate" class="form-label">Data de Devolução</label>
+                                <input type="date" class="form-control" id="returnDate" name="dataFim" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="returnAgency" class="form-label">Agência de Devolução</label>
+                                <select class="form-select" id="returnAgency" name="agenciaRetorno" required>
+                                    <option value="">Selecione...</option>
+                                    <option th:each="agencia : ${agencias}"
+                                            th:value="${agencia.numeroAgencia}"
+                                            th:text="${agencia.nomeAgencia}">Agência</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="paymentMethod" class="form-label">Forma de Pagamento</label>
+                                <select class="form-select" id="paymentMethod" name="tipoPagamento" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="CREDITO">Cartão de Crédito</option>
+                                    <option value="DEBITO">Cartão de Débito</option>
+                                    <option value="AVISTA">Pagamento à Vista</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-custom w-100 py-2">Reservar Agora</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title text-center mb-4">Por que escolher a AutoRent?</h4>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-car feature-icon me-3"></i>
+                        <div>
+                            <h5 class="mb-0">Frota Premium</h5>
+                            <p class="mb-0">Veículos de luxo e conforto</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-shield-alt feature-icon me-3"></i>
+                        <div>
+                            <h5 class="mb-0">Segurança Garantida</h5>
+                            <p class="mb-0">Todos os veículos são segurados</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-map-marked-alt feature-icon me-3"></i>
+                        <div>
+                            <h5 class="mb-0">GPS Incluso</h5>
+                            <p class="mb-0">Navegação fácil em qualquer lugar</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-headset feature-icon me-3"></i>
+                        <div>
+                            <h5 class="mb-0">Suporte 24/7</h5>
+                            <p class="mb-0">Assistência a qualquer momento</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h5>AutoRent</h5>
+                <p>Sua parceira de confiança para locação de veículos premium.</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Links Rápidos</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white">Sobre Nós</a></li>
+                    <li><a href="#" class="text-white">Termos e Condições</a></li>
+                    <li><a href="#" class="text-white">Política de Privacidade</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5>Contato</h5>
+                <p>Email: contato@autorent.com</p>
+                <p>Telefone: (11) 1234-5678</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+<script src="/webjars/bootstrap/5.3.1/js/bootstrap.bundle.min.js"></script>
+
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form');
+        const vehicleTypeSelect = form.querySelector('#vehicleType');
+        const pickupDate = form.querySelector('#pickupDate');
+        const returnDate = form.querySelector('#returnDate');
+
+        function calcularValorEstimado() {
+            if (vehicleTypeSelect.value && pickupDate.value && returnDate.value) {
+                const inicio = new Date(pickupDate.value);
+                const fim = new Date(returnDate.value);
+                const diasAluguel = Math.ceil((fim - inicio) / (1000 * 60 * 60 * 24));
+
+                const precos = {
+                    'CARRO': 100,
+                    'MOTO': 50,
+                    'CAMINHAO': 200
+                };
+
+                const valorDiaria = precos[vehicleTypeSelect.value] || 0;
+                const total = diasAluguel * valorDiaria;
+
+
+            }
+        }
+
+        vehicleTypeSelect.addEventListener('change', calcularValorEstimado);
+        pickupDate.addEventListener('change', calcularValorEstimado);
+        returnDate.addEventListener('change', calcularValorEstimado);
+    });
+</script>
+</body>
+</html>
