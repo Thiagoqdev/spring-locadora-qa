@@ -79,4 +79,19 @@ class LocadoraIntegracao {
         assertEquals(200, ResponseEntityAgencias.getStatusCodeValue());
 
     }
+
+    @Test
+    @Order(4)
+    @DisplayName("Deve fazer consulta em aluguel com o Token criado no test01")
+    void test04(){
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + this.Token);
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        ResponseEntity<String> ResponseEntityAlugueis = restTemplate.exchange("/api/alugueis", HttpMethod.GET, entity, String.class);
+
+        assertEquals(200, ResponseEntityAlugueis.getStatusCodeValue());
+    }
 }

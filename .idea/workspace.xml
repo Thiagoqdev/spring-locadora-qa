@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f99afd40-218d-46f3-8231-be269fa4c185" name="Changes" comment="Criando o test:&#10;Deve registrar um novo usuário no banco de dados e logar recebendo o token JWT em seguida fazer consulta em veículos com o Token">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8ce0472a-d61d-42bf-a0df-3adbbd3c197e.xml" beforeDir="false" />
+    <list default="true" id="f99afd40-218d-46f3-8231-be269fa4c185" name="Changes" comment="Criando o test:&#10;Deve fazer consulta em agencias com o Token criado no test01">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/repository/AgenciaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/repository/AgenciaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/service/AgenciaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/service/AgenciaService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/test/java/com/locadoraveiculo/locadoraveiculosapp/integracao/LocadoraIntegracao.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/test/java/com/locadoraveiculo/locadoraveiculosapp/integracao/LocadoraIntegracao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,6 +61,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "JUnit.AgenciaServiceTest.executor": "Run",
+    "JUnit.AgenciaServiceTest.testAgenciaService.executor": "Run",
     "JUnit.LocadoraIntegracao.executor": "Run",
     "JUnit.LocadoraIntegracao.test01.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
@@ -69,7 +73,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.LocadoraVeiculosAppApplication.executor": "Run",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Irving",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/irvin/OneDrive/Área de Trabalho/CURSO_ADA_SANTANDER/Módulo_Final_Testes_Automatizados/spring-locadora-qa",
@@ -86,7 +90,38 @@
       <recent name="C:\Users\gusha\IdeaProjects\spring-locadora-qa\locadora-veiculos-app\src\test\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.LocadoraIntegracao">
+  <component name="RunManager" selected="JUnit.AgenciaServiceTest">
+    <configuration name="AgenciaServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="locadora-veiculos-app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.locadoraveiculo.locadoraveiculosapp.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.locadoraveiculo.locadoraveiculosapp.service" />
+      <option name="MAIN_CLASS_NAME" value="com.locadoraveiculo.locadoraveiculosapp.service.AgenciaServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AgenciaServiceTest.testAgenciaService" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="locadora-veiculos-app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.locadoraveiculo.locadoraveiculosapp.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.locadoraveiculo.locadoraveiculosapp.service" />
+      <option name="MAIN_CLASS_NAME" value="com.locadoraveiculo.locadoraveiculosapp.service.AgenciaServiceTest" />
+      <option name="METHOD_NAME" value="testAgenciaService" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="LocadoraIntegracao" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="locadora-veiculos-app" />
       <extension name="coverage">
@@ -128,6 +163,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AgenciaServiceTest" />
+        <item itemvalue="JUnit.AgenciaServiceTest.testAgenciaService" />
         <item itemvalue="JUnit.LocadoraIntegracao" />
         <item itemvalue="JUnit.LocadoraIntegracao.test01" />
       </list>
@@ -153,7 +190,7 @@
       <workItem from="1731275680009" duration="9092000" />
       <workItem from="1731437234254" duration="13260000" />
       <workItem from="1733316653914" duration="14606000" />
-      <workItem from="1733333102668" duration="1385000" />
+      <workItem from="1733333102668" duration="8332000" />
     </task>
     <task id="LOCAL-00001" summary="primeiro Commit">
       <option name="closed" value="true" />
@@ -171,7 +208,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733329635016</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Criando o test:&#10;Deve fazer consulta em agencias com o Token criado no test01">
+      <option name="closed" value="true" />
+      <created>1733335569941</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1733335569941</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +225,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="primeiro Commit" />
     <MESSAGE value="Criando o test:&#10;Deve registrar um novo usuário no banco de dados e logar recebendo o token JWT em seguida fazer consulta em veículos com o Token" />
-    <option name="LAST_COMMIT_MESSAGE" value="Criando o test:&#10;Deve registrar um novo usuário no banco de dados e logar recebendo o token JWT em seguida fazer consulta em veículos com o Token" />
+    <MESSAGE value="Criando o test:&#10;Deve fazer consulta em agencias com o Token criado no test01" />
+    <option name="LAST_COMMIT_MESSAGE" value="Criando o test:&#10;Deve fazer consulta em agencias com o Token criado no test01" />
   </component>
 </project>
