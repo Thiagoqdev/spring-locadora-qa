@@ -11,10 +11,12 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ContextConfiguration;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
-import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
 @ContextConfiguration(classes = AgenciaService.class)
@@ -43,8 +45,5 @@ public class AgenciaServiceTest {
 
         assertTrue("Agencia deve estar presente", result.isPresent());
         assertEquals("Agencia1Teste", result.get().getNomeAgencia());
-    }
-
-    private void assertEquals(String agencia1Teste, String nomeAgencia) {
     }
 }

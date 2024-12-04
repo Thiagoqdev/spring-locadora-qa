@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f99afd40-218d-46f3-8231-be269fa4c185" name="Changes" comment="Criando o test:&#10;Deve fazer consulta em agencias com o Token criado no test01">
+    <list default="true" id="f99afd40-218d-46f3-8231-be269fa4c185" name="Changes" comment="Criando o test:&#10;Utilizando o Mock na classe AgenciaServiceTest">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/repository/AgenciaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/repository/AgenciaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/service/AgenciaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/service/AgenciaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/test/java/com/locadoraveiculo/locadoraveiculosapp/integracao/LocadoraIntegracao.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/test/java/com/locadoraveiculo/locadoraveiculosapp/integracao/LocadoraIntegracao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/test/java/com/locadoraveiculo/locadoraveiculosapp/service/AgenciaServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/test/java/com/locadoraveiculo/locadoraveiculosapp/service/AgenciaServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +41,16 @@
   "selectedUrlAndAccountId": {
     "url": "https://github.com/Thiagoqdev/spring-locadora-qa.git",
     "accountId": "da98f39f-49f1-43a4-9a83-a53368dc6e3c"
+  },
+  "recentNewPullRequestHead": {
+    "server": {
+      "useHttp": false,
+      "host": "github.com",
+      "port": null,
+      "suffix": null
+    },
+    "owner": "Thiagoqdev",
+    "repository": "spring-locadora-qa"
   }
 }]]></component>
   <component name="JpbToolWindowState">
@@ -190,7 +198,7 @@
       <workItem from="1731275680009" duration="9092000" />
       <workItem from="1731437234254" duration="13260000" />
       <workItem from="1733316653914" duration="14606000" />
-      <workItem from="1733333102668" duration="8332000" />
+      <workItem from="1733333102668" duration="10265000" />
     </task>
     <task id="LOCAL-00001" summary="primeiro Commit">
       <option name="closed" value="true" />
@@ -216,7 +224,23 @@
       <option name="project" value="LOCAL" />
       <updated>1733335569941</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Criando o test:&#10;Utilizando o Mock na classe AgenciaServiceTest">
+      <option name="closed" value="true" />
+      <created>1733341642936</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1733341642936</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Criando o test:&#10;Utilizando o Mock na classe AgenciaServiceTest">
+      <option name="closed" value="true" />
+      <created>1733341986381</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1733341986381</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,6 +250,7 @@
     <MESSAGE value="primeiro Commit" />
     <MESSAGE value="Criando o test:&#10;Deve registrar um novo usuário no banco de dados e logar recebendo o token JWT em seguida fazer consulta em veículos com o Token" />
     <MESSAGE value="Criando o test:&#10;Deve fazer consulta em agencias com o Token criado no test01" />
-    <option name="LAST_COMMIT_MESSAGE" value="Criando o test:&#10;Deve fazer consulta em agencias com o Token criado no test01" />
+    <MESSAGE value="Criando o test:&#10;Utilizando o Mock na classe AgenciaServiceTest" />
+    <option name="LAST_COMMIT_MESSAGE" value="Criando o test:&#10;Utilizando o Mock na classe AgenciaServiceTest" />
   </component>
 </project>
