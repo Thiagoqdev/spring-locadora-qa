@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f99afd40-218d-46f3-8231-be269fa4c185" name="Changes" comment="Criando o test:&#10;Deve registrar um novo usuário no banco de dados e logar recebendo o token JWT em seguida fazer consulta em veículos com o Token">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8ce0472a-d61d-42bf-a0df-3adbbd3c197e.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/test/java/com/locadoraveiculo/locadoraveiculosapp/integracao/LocadoraIntegracao.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/test/java/com/locadoraveiculo/locadoraveiculosapp/integracao/LocadoraIntegracao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +40,7 @@
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/Thiagoqdev/spring-locadora-qa.git",
-    "accountId": "8055c86b-f996-4063-b770-6ca90ae49cf0"
+    "accountId": "da98f39f-49f1-43a4-9a83-a53368dc6e3c"
   }
 }]]></component>
   <component name="JpbToolWindowState">
@@ -69,10 +69,10 @@
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.LocadoraVeiculosAppApplication.executor": "Run",
-    "git-widget-placeholder": "Habib",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/programação/Santander-Coder/Spring/Projeto Final/Projeto-Spring-LocadoraVeiculos",
+    "last_opened_file_path": "C:/Users/irvin/OneDrive/Área de Trabalho/CURSO_ADA_SANTANDER/Módulo_Final_Testes_Automatizados/spring-locadora-qa",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -136,8 +136,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.21565.193" />
-        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-IU-243.21565.193" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17890.1" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17890.1" />
       </set>
     </attachedChunks>
   </component>
@@ -153,6 +153,7 @@
       <workItem from="1731275680009" duration="9092000" />
       <workItem from="1731437234254" duration="13260000" />
       <workItem from="1733316653914" duration="14606000" />
+      <workItem from="1733333102668" duration="1385000" />
     </task>
     <task id="LOCAL-00001" summary="primeiro Commit">
       <option name="closed" value="true" />

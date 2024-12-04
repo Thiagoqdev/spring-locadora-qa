@@ -53,8 +53,6 @@ class LocadoraIntegracao {
     @DisplayName("Deve fazer consulta em veículos com o Token criado no test01")
     void test02(){
 
-        System.out.println(this.Token);
-
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + this.Token);
 
@@ -66,4 +64,19 @@ class LocadoraIntegracao {
 
     }
 
+    @Test
+    @Order(3)
+    @DisplayName("Deve fazer consulta em agencias com o Token criado no test01")
+    void test03(){
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + this.Token);
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        ResponseEntity<String> ResponseEntityAgencias = restTemplate.exchange("/api/agencias", HttpMethod.GET, entity, String.class);
+
+        assertEquals(200, ResponseEntityAgencias.getStatusCodeValue());
+
+    }
 }
