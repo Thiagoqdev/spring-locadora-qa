@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AgenciaRepository extends JpaRepository<Agencia, Long> {
 
-    Object buscarPorId(long l);
 }
