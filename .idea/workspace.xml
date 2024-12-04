@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f99afd40-218d-46f3-8231-be269fa4c185" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="f99afd40-218d-46f3-8231-be269fa4c185" name="Changes" comment="primeiro Commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +59,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "JUnit.LocadoraIntegracao.test01.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -79,7 +80,28 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\gusha\IdeaProjects\spring-locadora-qa\locadora-veiculos-app\src\test\resources" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.LocadoraIntegracao.test01">
+    <configuration name="LocadoraIntegracao.test01" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="locadora-veiculos-app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.locadoraveiculo.locadoraveiculosapp.integracao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.locadoraveiculo.locadoraveiculosapp.integracao" />
+      <option name="MAIN_CLASS_NAME" value="com.locadoraveiculo.locadoraveiculosapp.integracao.LocadoraIntegracao" />
+      <option name="METHOD_NAME" value="test01" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="LocadoraVeiculosAppApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="locadora-veiculos-app" />
@@ -88,6 +110,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.LocadoraIntegracao.test01" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -108,11 +135,24 @@
       <workItem from="1731275420452" duration="249000" />
       <workItem from="1731275680009" duration="9092000" />
       <workItem from="1731437234254" duration="13260000" />
-      <workItem from="1733316653914" duration="4491000" />
+      <workItem from="1733316653914" duration="11695000" />
     </task>
+    <task id="LOCAL-00001" summary="primeiro Commit">
+      <option name="closed" value="true" />
+      <created>1733322471966</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1733322471966</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="primeiro Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="primeiro Commit" />
   </component>
 </project>
