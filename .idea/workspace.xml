@@ -6,25 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f99afd40-218d-46f3-8231-be269fa4c185" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8ce0472a-d61d-42bf-a0df-3adbbd3c197e.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8ce0472a-d61d-42bf-a0df-3adbbd3c197e.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/config/SecurityFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/config/SecurityFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/config/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/config/SwaggerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/dto/LoginResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/dto/LoginResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/dto/RegisterDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/dto/RegisterDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/dto/UserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/dto/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/dto/UserRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/model/Agencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/model/Agencia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/model/Aluguel.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/model/Aluguel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/model/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/model/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/service/TokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/service/TokenService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/main/java/com/locadoraveiculo/locadoraveiculosapp/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locadora-veiculos-app/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/locadora-veiculos-app/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +24,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -50,12 +37,15 @@
     &quot;assignee&quot;: &quot;Thiagoqdev&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Thiagoqdev/Projeto-Spring-LocadoraVeiculos.git&quot;,
-    &quot;accountId&quot;: &quot;99c35053-3f1e-47b5-a341-b9a37cddfd7a&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Thiagoqdev/spring-locadora-qa.git",
+    "accountId": "8055c86b-f996-4063-b770-6ca90ae49cf0"
   }
-}</component>
+}]]></component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -67,27 +57,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.LocadoraVeiculosAppApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;new-security&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/programação/Santander-Coder/Spring/Projeto Final/Projeto-Spring-LocadoraVeiculos&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.LocadoraVeiculosAppApplication.executor": "Run",
+    "git-widget-placeholder": "Habib",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/programação/Santander-Coder/Spring/Projeto Final/Projeto-Spring-LocadoraVeiculos",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="LocadoraVeiculosAppApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
@@ -101,8 +92,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.21565.193" />
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-IU-243.21565.193" />
       </set>
     </attachedChunks>
   </component>
@@ -117,6 +108,7 @@
       <workItem from="1731275420452" duration="249000" />
       <workItem from="1731275680009" duration="9092000" />
       <workItem from="1731437234254" duration="13260000" />
+      <workItem from="1733316653914" duration="4491000" />
     </task>
     <servers />
   </component>
