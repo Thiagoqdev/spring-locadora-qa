@@ -26,6 +26,7 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
+
     public UserEntity findByLogin(String login) {
         return userRepository.findByLogin(login).orElse(null);
     }
@@ -39,6 +40,10 @@ public class UserService implements UserDetailsService {
         String passwordEncrypted = new BCryptPasswordEncoder().encode(registerDTO.password());
         UserEntity user = new UserEntity(registerDTO.login(), passwordEncrypted, registerDTO.userRole());
         userRepository.save(user);
+    }
+
+    public UserEntity findById(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 
 }

@@ -16,7 +16,7 @@ import java.util.Optional;
 @Service
 public class AluguelService {
 
-    private final AluguelRepository aluguelRepository;
+    private final  AluguelRepository aluguelRepository;
     private final VeiculoRepository veiculoRepository;
 
 
