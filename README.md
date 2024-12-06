@@ -75,7 +75,7 @@ Certifique-se de ter as seguintes ferramentas instaladas:
    ```
 ##  Estrutura do Projeto
    ```bash
-/src/main/java/com/seuprojeto/
+/src/main/java/com/spring-locadora-qa/
 ├── config/           # Configurações do projeto (Swagger, segurança, etc.)
 ├── controller/       # Endpoints REST
 ├── dto/              # Objetos de transferência de dados (DTOs)
@@ -83,7 +83,7 @@ Certifique-se de ter as seguintes ferramentas instaladas:
 ├── repository/       # Interfaces de repositório (JPA)
 ├── service/          # Lógica de negócios e serviços
 
-/src/test/java/com/seuprojeto/
+/src/test/java/com/spring-locadora-qa/
 ├── unit/             # Testes unitários
 ├── integracao/       # Testes de integração
 ├── stepdefinitions/  # Definições dos cenários Cucumber
