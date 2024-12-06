@@ -4,9 +4,11 @@ import com.locadoraveiculo.locadoraveiculosapp.model.Aluguel;
 import com.locadoraveiculo.locadoraveiculosapp.repository.AluguelRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -15,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class AluguelServiceTest {
 
     @Mock
@@ -27,7 +30,6 @@ class AluguelServiceTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
         aluguel1 = new Aluguel();
         aluguel1.setAluguel_id(1L);
         aluguel1.setValorCobrado(BigDecimal.valueOf(100.00));

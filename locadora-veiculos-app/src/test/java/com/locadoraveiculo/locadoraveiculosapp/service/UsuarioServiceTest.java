@@ -4,9 +4,11 @@ import com.locadoraveiculo.locadoraveiculosapp.model.Usuario;
 import com.locadoraveiculo.locadoraveiculosapp.repository.UsuarioRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
@@ -14,6 +16,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class UsuarioServiceTest {
 
 
@@ -27,7 +30,6 @@ class UsuarioServiceTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
         usuario = new Usuario();
         usuario.setId_usuario(1L);
         usuario.setNome("Thiago");
