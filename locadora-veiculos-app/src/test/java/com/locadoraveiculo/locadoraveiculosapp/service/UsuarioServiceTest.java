@@ -1,8 +1,6 @@
 package com.locadoraveiculo.locadoraveiculosapp.service;
 
-import com.locadoraveiculo.locadoraveiculosapp.model.UserEntity;
 import com.locadoraveiculo.locadoraveiculosapp.model.Usuario;
-import com.locadoraveiculo.locadoraveiculosapp.repository.UserRepository;
 import com.locadoraveiculo.locadoraveiculosapp.repository.UsuarioRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
