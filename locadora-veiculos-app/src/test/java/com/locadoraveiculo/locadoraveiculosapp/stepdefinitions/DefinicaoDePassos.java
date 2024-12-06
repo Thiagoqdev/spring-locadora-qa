@@ -3,19 +3,16 @@ package com.locadoraveiculo.locadoraveiculosapp.stepdefinitions;
 import com.locadoraveiculo.locadoraveiculosapp.dto.UserRole;
 import com.locadoraveiculo.locadoraveiculosapp.model.UserEntity;
 import com.locadoraveiculo.locadoraveiculosapp.repository.UserRepository;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @CucumberContextConfiguration
 @SpringBootTest
