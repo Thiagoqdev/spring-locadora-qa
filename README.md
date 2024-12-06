@@ -1,154 +1,111 @@
-# Projeto Spring Boot - API de Locadora de Veículos
+# API REST com Testes Automatizados de Locadora de Veículos
 
-Este projeto implementa uma API REST para uma locadora de veículos, fornecendo funcionalidades de gerenciamento de veículos, clientes e transações de aluguel. A API suporta operações CRUD completas, segurança com controle de rotas, login, e oferece opções de consumo de APIs externas e documentação via Swagger.
+## Descrição do Projeto
+Este projeto é uma API REST desenvolvida em Java utilizando o framework Spring Boot. Ele implementa funcionalidades específicas (descreva aqui brevemente as funcionalidades principais da API, como gerenciamento de usuários, autenticação, etc.).
 
-## Funcionalidades
+Além disso, foram criados testes automatizados abrangendo as camadas unitária, de integração e de aceitação (end-to-end), utilizando JUnit, WireMock, e Cucumber para garantir a qualidade e confiabilidade do sistema.
 
-- **Persistência de dados**: Armazena informações no banco de dados (H2 para desenvolvimento ou PostgreSQL para produção).
-- **Operações CRUD**: Suporte para métodos HTTP (GET, POST, PUT e DELETE) nas principais entidades.
-- **Paginação**: Endpoints de listagem com suporte a paginação para facilitar a navegação entre os dados.
-- **Validações**: Validação de dados nos controllers usando Regex e a anotação `@Valid` para garantir integridade.
-- **Segurança**: Controle de rotas e autenticação por meio de JWT (opcional).
-- **Consumo de API externa (opcional)**: Integração com uma API pública, como uma API de informações sobre veículos.
-- **Documentação com Swagger (opcional)**: Documentação automática dos endpoints, acessível via interface web.
-- **Frontend (opcional)**: Interface para visualização e gerenciamento dos recursos da API.
+## Principais Funcionalidades
+
+- **Endpoints REST:**
+  - (Liste os principais endpoints e suas funções, ex.: /api/login para autenticação, /api/users para gerenciamento de usuários, etc.).
+- **Testes Automatizados:**
+  - Unitários: Validam a lógica de negócio.
+  - Integração: Verificam interações entre componentes.
+  - End-to-End: Simulam fluxos completos do sistema com cenários descritos em Gherkin.
 
 ## Tecnologias Utilizadas
-**Linguagem:** Java
+**Java 17**
 
-**Framework:** Spring Boot
+**Spring Boot 3.x**
 
-**Banco de Dados:** H2 (desenvolvimento) ou Postgres (produção)
+**JUnit 5**
 
-**Autenticação:** JWT (opcional)
+**Cucumber para BDD**
 
-**Documentação:** Swagger (opcional)
+**WireMock para mock de APIs externas**
 
+**H2 Database (banco em memória para testes)**
 
-## Endpoints Principais
+**Maven como gerenciador de dependências**
 
-Abaixo estão os principais endpoints da API:
+## Configuração do Ambiente
+**Pré-requisitos**
 
-| Recurso     | Método     | Descrição                          |
-|:------------|:-----------|:-----------------------------------|
-| `/veiculos` | **GET**    | Lista veículos com paginação       |
-|             | **POST**   | Cria um novo veículo               |
-|             | **PUT**    | Atualiza informações de um veículo |
-|             | **DELETE** | Remove um veículo                  |
+Certifique-se de ter as seguintes ferramentas instaladas:
 
-| Recurso     | Método     | Descrição                    |
-|:------------|:-----------|:-----------------------------|
-| `/clientes` | **GET**    | Lista clientes               |
-|             | **POST**   | Cria um novo cliente         |
-|             | **PUT**    | Atualiza dados de um cliente |
-|             | **DELETE** | Remove um cliente            |
+- Java 17+
+- Maven 3.8+
 
-| Recurso     | Método     | Descrição                             |
-|:------------|:-----------|:--------------------------------------|
-| `/alugueis` | **GET**    | Lista clientes                        |
-|             | **POST**   | Realiza uma nova transação de aluguel |
-|             | **PUT**    | Atualiza uma transação de aluguel     |
-|             | **DELETE** | Cancela uma transação de aluguel      |
+**Passos para Configuração**
 
-| Recurso                       | Método   | Descrição                                      |
-|:------------------------------|:---------|:-----------------------------------------------|
-| `/auth/register`              | **POST** | criação de usuário                             |		
-|                               |          | {                                              |		
-|                               |          | "login": "usuario",                            |		
-|                               |          | "password": "senha123",                        |		
-|                               |          | "role": "ADMIN" // ou "USER"                   |		
-|                               |          | }                                              |		                            
-| `/auth/login`                 | **POST** | Autenticação de usuário e geração de token JWT |
-|                               |          | {                                              |	
-|                               |          | "login": "usuario",                            |	
-|                               |          | "password": "senha123"                         |
-|                               |          | }                                              |
-
-| Recurso              | Método   | Descrição                                             |
-|:---------------------|----------|:------------------------------------------------------|
-| `Agência (Agencia):` | **JSON** | {                                                     |
-|                      |          | "nomeAgencia": "Locadora Veloz",                      |
-|                      |          | "enderecoAgencia": "Av. Brasil, 1500 - São Paulo, SP" |
-|                      |          | }                                                     |
-
-| Recurso              | Método   | Descrição                            |
-|:---------------------|----------|:-------------------------------------|
-| `Usuário (Usuario):` | **JSON** | {                                    |
-|                      |          | "nome": "Carlos Eduardo Oliveira",   |
-|                      |          | "email": "carlos.eduardo@email.com", |
-|                      |          | "cpf": "12345678901",                |
-|                      |          | "senha": "SenhaForte@2024",          |
-|                      |          | "tipoUsuario": "CLIENTE"             |
-|                      |          | }                                    |
-
-| Recurso              | Método   | Descrição                      |
-|:---------------------|----------|:-------------------------------|
-| `Veículo (Veiculo):` | **JSON** | {                              |
-|                      |          | "placa": "ABC1D23",            |
-|                      |          | "modelo": "Gol",               |
-|                      |          | "marca": "Volkswagen",         |
-|                      |          | "anoFabricacao": "2022",       |
-|                      |          | "statusAluguel": "DISPONIVEL", |
-|                      |          | "tipoVeiculo": "CARRO"         |
-|                      |          | }                              |
-
-| Recurso              | Método   | Descrição                            |
-|:---------------------|----------|:-------------------------------------|
-| `Aluguel (Aluguel):` | **JSON** | {                                    |
-|                      |          | "agencia": {"numeroAgencia": 1},     |
-|                      |          | "veiculo": {"veiculo_id": 1},        |
-|                      |          | "valorCobrado": 350.75,              |
-|                      |          | "dataInicio": "2024-03-15T10:00:00", |
-|                      |          | "dataFim": "2024-03-20T18:00:00",    |
-|                      |          | "tipoPagamento": "CREDITO"           |
-|                      |          | }                                    |
-	
-## Instalação e Configuração
-
-### Pré-requisitos
-
-- Java JDK 17+
-- Maven
-- Banco de Dados H2 (desenvolvimento) ou PostgreSQL (produção)
-
-### Passos para executar o projeto
-
-1. **Clonar o repositório**:
+1. Clone o repositório:
    ```bash
-   git clone https://github.com/Thiagoqdev/Projeto-Spring-LocadoraVeiculos.git
-   cd locadora-veiculos-api
+   git clone <https://github.com/Thiagoqdev/spring-locadora-qa>
    ```
+2. Configure o ambiente de desenvolvimento:
 
-2. **Configurar o banco de dados**:
-   - Para desenvolvimento, o projeto usa H2 por padrão.
-   - Para PostgreSQL, edite o arquivo `application.properties` com suas credenciais e a URL de conexão.
+- Os testes utilizam o banco de dados H2 em memória, não sendo necessário configurar um banco externo.
 
+- Para os testes de integração com APIs externas, o **WireMock** será configurado automaticamente durante a execução.
 
-3. **Compilar e rodar a aplicação**:
+3. Para executar os testes, veja a seção "Como Executar os Testes".
+
+## Como Executar a Aplicação
+1. Execute o projeto:
    ```bash
-   mvn clean install
    mvn spring-boot:run
    ```
+2. Acesse a documentação Swagger (caso configurado):
+   ```bash
+   http://localhost:8080/swagger-ui.html
+   ```
 
-### Documentação (Swagger)
+## Como Executar os Testes
+**Testes Unitários e de Integração**
 
-A documentação da API, gerada automaticamente com Swagger, está disponível em: http://localhost:8080/swagger-ui/index.html#/
+- Para rodar todos os testes unitários e de integração:
+   ```bash
+   mvn test
+   ```
+**Testes Funcionais (Cucumber)**
+- Os testes end-to-end estão localizados em src/test/resources/features. Para executá-los:
+   ```bash
+   mvn clean test
+   ```
+##  Estrutura do Projeto
+   ```bash
+/src/main/java/com/seuprojeto/
+├── config/           # Configurações do projeto (Swagger, segurança, etc.)
+├── controller/       # Endpoints REST
+├── dto/              # Objetos de transferência de dados (DTOs)
+├── model/            # Entidades do sistema
+├── repository/       # Interfaces de repositório (JPA)
+├── service/          # Lógica de negócios e serviços
 
-## Estrutura do Projeto
+/src/test/java/com/seuprojeto/
+├── unit/             # Testes unitários
+├── integracao/       # Testes de integração
+├── stepdefinitions/  # Definições dos cenários Cucumber
+/src/test/resources/features/
+├── *.feature         # Cenários descritos em Gherkin
+   ```
+## Como Contribuir
+1. Faça um fork do repositório.
 
-- `src/main/java`: Código-fonte do projeto.
-- `src/main/resources`: Configurações da aplicação e schema do banco de dados.
-- `pom.xml`: Configurações do Maven e dependências.
 
-### Principais Classes
-
-- **Controller**: Camada que expõe os endpoints da API.
-- **Service**: Contém a lógica de negócios.
-- **Repository**: Responsável pela interação com o banco de dados.
-- **Config**: Configurações de segurança e JWT.
-
-## Licença
-
-Este projeto está licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais detalhes.
+2. Crie uma branch para sua feature:
+    ```bash
+   git checkout -b minha-feature
+   ```
+3. Commit suas alterações:
+    ```bash
+   git commit -m "Adicionando minha feature"
+   ```
+4. Commit suas alterações:
+    ```bash
+   git push origin minha-feature
+   ```
+5. Abra um Pull Request.
 
 ---
